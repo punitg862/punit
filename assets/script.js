@@ -40,3 +40,53 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
 sections.forEach(section => sectionObserver.observe(section));
+
+// TESTIMONIALS CAROUSEL
+document.addEventListener('DOMContentLoaded', function() {
+  const track = document.querySelector('.testimonial-track');
+  const dotsContainer = document.getElementById('carouselDots');
+  const prevBtn = document.querySelector('.carousel-prev');
+  const nextBtn = document.querySelector('.carousel-next');
+
+  if (!track || !dotsContainer) return;
+
+  const testimonialCards = document.querySelectorAll('.testimonial-card');
+  const totalSlides = testimonialCards.length;
+
+  let currentSlide = 0;
+
+  const dots = [];
+  testimonialCards.forEach((_, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      updateCarousel();
+    });
+    dotsContainer.appendChild(dot);
+    dots.push(dot);
+  });
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+  }
+});
