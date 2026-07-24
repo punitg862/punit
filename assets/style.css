@@ -96,7 +96,7 @@ li{margin-bottom:6px;color:var(--ink-soft)}
   grid-template-columns:1.3fr 0.9fr;
   gap:56px;
   align-items:center;
-  padding:72px 24px 88px;
+  padding:48px 24px 64px;
 }
 .badge{
   display:inline-block;
@@ -104,7 +104,7 @@ li{margin-bottom:6px;color:var(--ink-soft)}
   color:var(--pill-text);
   font-size:13px;font-weight:600;
   padding:6px 14px;border-radius:999px;
-  margin-bottom:20px;
+  margin-bottom:12px;
 }
 h1{font-size:44px;line-height:1.15;margin:0 0 8px;letter-spacing:-0.02em}
 .accent{color:var(--accent)}
@@ -151,15 +151,18 @@ h1{font-size:44px;line-height:1.15;margin:0 0 8px;letter-spacing:-0.02em}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .hero-info{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:18px}
 .info-row{display:flex;flex-direction:column;gap:2px;font-size:14.5px}
+.info-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.info-pair .info-row{gap:2px}
 .info-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
 
 /* SECTIONS */
-.section{padding:80px 0}
+.section{padding:60px 0}
 .section-alt{background:var(--bg-alt)}
 .section-title{font-size:30px;letter-spacing:-0.02em;margin:0 0 12px;text-align:center}
 .section-sub{text-align:center;color:var(--ink-soft);margin:0 0 40px}
+#about .section-title{margin-bottom:36px}
 .about-box{
-  max-width:820px;margin:0 auto;background:var(--card-bg);border:1px solid var(--line);
+  background:var(--card-bg);border:1px solid var(--line);
   border-radius:var(--radius);box-shadow:var(--shadow);padding:36px;
 }
 .about-box p{margin:0;color:var(--ink-soft);font-size:16px}
