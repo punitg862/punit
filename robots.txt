@@ -1,0 +1,14 @@
+# Robots.txt for Punit Kumar Gupta Portfolio
+User-agent: *
+Allow: /punit/
+Disallow:
+
+# Specific crawl delays
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://punitg862.github.io/punit/sitemap.xml
