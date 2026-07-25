@@ -305,6 +305,42 @@ h1{font-size:44px;line-height:1.15;margin:0 0 8px;letter-spacing:-0.01em;font-we
 }
 .contact-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
 
+.contact-btn{
+  background:var(--card-bg);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+  padding:20px;display:flex;flex-direction:column;gap:6px;color:var(--ink) !important;font-weight:600;font-size:14px;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;cursor:pointer;
+}
+.contact-btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+
+/* MODALS */
+.contact-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:100}
+.contact-modal.active{display:flex;align-items:center;justify-content:center}
+.modal-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)}
+.modal-content{
+  position:relative;z-index:101;background:var(--card-bg);border-radius:20px;padding:32px;
+  max-width:320px;width:90%;box-shadow:var(--shadow-depth);border:1px solid var(--line);
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:none;border:none;font-size:28px;
+  color:var(--ink-soft);cursor:pointer;width:32px;height:32px;display:flex;align-items:center;
+  justify-content:center;transition:color .2s ease;
+}
+.modal-close:hover{color:var(--ink)}
+.modal-content h3{margin:0 0 20px;font-size:18px;text-align:center}
+.modal-buttons{display:flex;flex-direction:column;gap:12px}
+.modal-option{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  padding:16px 20px;border:1px solid var(--line);border-radius:12px;
+  background:var(--bg-alt);color:var(--ink) !important;font-weight:600;
+  transition:all .2s ease;text-decoration:none;
+}
+.modal-option:hover{
+  background:var(--accent);color:#fff !important;border-color:var(--accent);
+  transform:translateY(-2px);box-shadow:var(--shadow-hover);
+}
+.option-icon{font-size:20px}
+.option-text{font-size:14px}
+
 .footer{padding:28px 0;border-top:1px solid var(--line)}
 .footer p{margin:0;text-align:center;color:var(--muted);font-size:13.5px}
 

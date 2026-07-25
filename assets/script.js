@@ -40,3 +40,61 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
 sections.forEach(section => sectionObserver.observe(section));
+
+// Contact Modals
+function initModals() {
+  const indiaModal = document.getElementById('indiaModal');
+  const uaeModal = document.getElementById('uaeModal');
+  const indiaOverlay = document.getElementById('indiaOverlay');
+  const uaeOverlay = document.getElementById('uaeOverlay');
+  const indiaClose = document.getElementById('indiaClose');
+  const uaeClose = document.getElementById('uaeClose');
+  const contactBtns = document.querySelectorAll('.contact-btn');
+
+  if (!indiaModal || !uaeModal) return;
+
+  function openModal(modal) {
+    if (modal) modal.classList.add('active');
+  }
+
+  function closeModal(modal) {
+    if (modal) modal.classList.remove('active');
+  }
+
+  contactBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modalType = btn.getAttribute('data-modal');
+      if (modalType === 'india') openModal(indiaModal);
+      if (modalType === 'uae') openModal(uaeModal);
+    });
+  });
+
+  if (indiaClose) indiaClose.addEventListener('click', () => closeModal(indiaModal));
+  if (uaeClose) uaeClose.addEventListener('click', () => closeModal(uaeModal));
+  if (indiaOverlay) indiaOverlay.addEventListener('click', () => closeModal(indiaModal));
+  if (uaeOverlay) uaeOverlay.addEventListener('click', () => closeModal(uaeModal));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal(indiaModal);
+      closeModal(uaeModal);
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initModals);
+} else {
+  initModals();
+}
+
+// Botim app opening
+function openBotim(event) {
+  event.preventDefault();
+  const number = '971522018157';
+  const botimUrl = `botim://call?number=${number}`;
+  window.location.href = botimUrl;
+  setTimeout(() => {
+    window.location.href = `https://wa.me/${number}`;
+  }, 1500);
+}

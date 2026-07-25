@@ -530,22 +530,56 @@
           <span class="info-label">Email</span>
           puneetg862@gmail.com
         </a>
-        <a class="contact-item" href="tel:+918376908993">
+        <button class="contact-item contact-btn" data-modal="india">
           <span class="info-label">Phone</span>
           +91 83769 08993
-        </a>
-        <a class="contact-item" href="https://wa.me/971522018157" target="_blank" rel="noopener">
+        </button>
+        <button class="contact-item contact-btn" data-modal="uae">
           <span class="info-label">WhatsApp / Botim</span>
           +971 522 018157
-        </a>
+        </button>
         <a class="contact-item" href="https://www.linkedin.com/in/puneetg862/" target="_blank" rel="noopener">
           <span class="info-label">LinkedIn</span>
           in/puneetg862
         </a>
-        <a class="contact-item" href="https://github.com/punitg862" target="_blank" rel="noopener">
-          <span class="info-label">GitHub</span>
-          punitg862
-        </a>
+      </div>
+
+      <!-- India Contact Modal -->
+      <div class="contact-modal" id="indiaModal">
+        <div class="modal-overlay" id="indiaOverlay"></div>
+        <div class="modal-content">
+          <button class="modal-close" id="indiaClose">&times;</button>
+          <h3>+91 83769 08993</h3>
+          <div class="modal-buttons">
+            <a href="tel:+918376908993" class="modal-option">
+              <span class="option-icon">📱</span>
+              <span class="option-text">Call</span>
+            </a>
+            <a href="https://wa.me/918376908993" target="_blank" rel="noopener" class="modal-option">
+              <span class="option-icon">💬</span>
+              <span class="option-text">WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- UAE Contact Modal -->
+      <div class="contact-modal" id="uaeModal">
+        <div class="modal-overlay" id="uaeOverlay"></div>
+        <div class="modal-content">
+          <button class="modal-close" id="uaeClose">&times;</button>
+          <h3>+971 522 018157</h3>
+          <div class="modal-buttons">
+            <a href="https://wa.me/971522018157" target="_blank" rel="noopener" class="modal-option">
+              <span class="option-icon">💬</span>
+              <span class="option-text">WhatsApp</span>
+            </a>
+            <a href="botim://call?number=971522018157" id="botimLink" class="modal-option" onclick="openBotim(event)">
+              <span class="option-icon">📲</span>
+              <span class="option-text">Botim</span>
+            </a>
+          </div>
+        </div>
       </div>
       <a href="mailto:puneetg862@gmail.com" class="btn btn-primary" style="margin-top:32px">Say Hello</a>
     </div>
