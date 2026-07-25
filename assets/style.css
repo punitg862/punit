@@ -332,7 +332,8 @@ h1{font-size:44px;line-height:1.15;margin:0 0 8px;letter-spacing:-0.01em;font-we
   display:flex;align-items:center;justify-content:center;gap:12px;
   padding:16px 20px;border:1px solid var(--line);border-radius:12px;
   background:var(--bg-alt);color:var(--ink) !important;font-weight:600;
-  transition:all .2s ease;text-decoration:none;
+  transition:all .2s ease;text-decoration:none;cursor:pointer;
+  font-size:14px;font-family:inherit;
 }
 .modal-option:hover{
   background:var(--accent);color:#fff !important;border-color:var(--accent);
