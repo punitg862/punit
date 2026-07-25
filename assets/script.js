@@ -88,34 +88,14 @@ if (document.readyState === 'loading') {
   initModals();
 }
 
-// Botim app opening
+// Botim app opening - Only open Botim, no fallback
 function openBotim(event) {
-  event.preventDefault();
-  const number = '971522018157';
-  const numberClean = number.replace(/\D/g, '');
+    event.preventDefault();
 
-  // Try multiple Botim deep link formats
-  const botimUrls = [
-    `botim://user/${numberClean}`,
-    `botim://call/${numberClean}`,
-    `botim://contact/${numberClean}`,
-    `https://botim.me/user/${numberClean}` // Web fallback
-  ];
+    const phoneNumber = "+971522018157";
 
-  // Try first deep link
-  if (navigator.userAgent.match(/iPhone|iPad|iPod|Android/i)) {
-    // Mobile device - try app first
-    window.location.href = botimUrls[0];
-
-    // Fallback to WhatsApp after 2 seconds if Botim not installed
-    const timeout = setTimeout(() => {
-      window.location.href = `https://wa.me/${numberClean}`;
-    }, 2000);
-
-    // Clear timeout if user navigates (app was opened)
-    window.addEventListener('blur', () => clearTimeout(timeout));
-  } else {
-    // Desktop - open WhatsApp directly
-    window.open(`https://wa.me/${numberClean}`, '_blank');
-  }
+    navigator.clipboard.writeText(phoneNumber).finally(() => {
+        alert("Phone number copied to clipboard. Paste it in BOTIM.");
+        window.location.href = "botim://";
+    });
 }
