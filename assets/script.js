@@ -92,10 +92,9 @@ if (document.readyState === 'loading') {
 function openBotim(event) {
     event.preventDefault();
 
-    const phoneNumber = "+971522018157";
+    window.location.href = "botim://";
 
-    navigator.clipboard.writeText(phoneNumber).finally(() => {
-        alert("Phone number copied to clipboard. Paste it in BOTIM.");
-        window.location.href = "botim://";
-    });
+    setTimeout(() => {
+        navigator.clipboard.writeText("+971522018157").catch(() => {});
+    }, 300);
 }
