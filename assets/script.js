@@ -128,15 +128,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactFormModal = document.getElementById('contactFormModal');
   const contactFormOverlay = document.getElementById('contactFormOverlay');
   const contactFormClose = document.getElementById('contactFormClose');
+  let isSubmitting = false;
 
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (isSubmitting) {
+        console.log('Already submitting, please wait...');
+        return;
+      }
+
+      isSubmitting = true;
       clearAllErrors();
 
-      const subject = document.getElementById('subject').value.trim();
-      const email = document.getElementById('contact').value.trim();
-      const message = document.getElementById('message').value.trim();
+      const subjectEl = document.getElementById('subject');
+      const emailEl = document.getElementById('contact');
+      const messageEl = document.getElementById('message');
+
+      if (!subjectEl || !emailEl || !messageEl) {
+        console.error('Form elements not found');
+        alert('Form error. Please refresh and try again.');
+        return;
+      }
+
+      const subject = (subjectEl.value || '').trim();
+      const email = (emailEl.value || '').trim();
+      const message = (messageEl.value || '').trim();
 
       let isValid = true;
 
@@ -175,9 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Web3Forms response:', data);
 
         if (data.success) {
+          console.log('Submission successful, closing modal');
           alert('Message sent successfully! I will get back to you soon.');
-          contactForm.reset();
           closeContactModal();
+          contactForm.reset();
         } else {
           console.error('Web3Forms error:', data);
           alert('Failed to send message. Please try again.');
@@ -185,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         console.error('Submission error:', error);
         alert('Error sending message. Please try again.');
+      } finally {
+        isSubmitting = false;
       }
     });
   }
