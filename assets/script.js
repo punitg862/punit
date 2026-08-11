@@ -122,6 +122,16 @@ function validateEmail(email) {
   return emailRegex.test(email);
 }
 
+function validateMobile(phone) {
+  const phoneRegex = /^\d{10,15}$/;
+  return phoneRegex.test(phone.replace(/[^\d]/g, ''));
+}
+
+function isValidContact(contact) {
+  // Check if it's a valid email or mobile number
+  return validateEmail(contact) || validateMobile(contact);
+}
+
 // Contact Form Submission
 document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contactForm');
@@ -135,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearAllErrors();
 
       const subject = document.getElementById('subject').value.trim();
-      const email = document.getElementById('contact').value.trim();
+      const contact = document.getElementById('contact').value.trim();
       const message = document.getElementById('message').value.trim();
 
       let isValid = true;
@@ -146,11 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
         isValid = false;
       }
 
-      if (!email) {
-        document.getElementById('contactError').textContent = 'Email is required';
+      if (!contact) {
+        document.getElementById('contactError').textContent = 'Contact no. or Email is required';
         isValid = false;
-      } else if (!validateEmail(email)) {
-        document.getElementById('contactError').textContent = 'Enter a valid email address';
+      } else if (!isValidContact(contact)) {
+        document.getElementById('contactError').textContent = 'Enter valid email or mobile number (10-15 digits)';
         isValid = false;
       }
 
@@ -161,29 +171,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!isValid) return;
 
-      // Submit to Web3Forms
+      // Send email
       try {
-        const formData = new FormData(contactForm);
-        formData.append('reply_to', email);
+        const emailData = {
+          to: 'puneetg862@gmail.com',
+          from: 'punitgenbd@gmail.com',
+          subject: 'Portfolio: ' + subject,
+          message: message,
+          senderContact: contact
+        };
 
-        const response = await fetch('https://api.web3forms.com/submit', {
+        // Use FormSubmit.co
+        const response = await fetch('https://formspree.io/f/xjkvrdld', {
           method: 'POST',
-          body: formData
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: contact,
+            subject: 'Portfolio: ' + subject,
+            message: message
+          })
         });
 
-        const data = await response.json();
-        console.log('Web3Forms response:', data);
-
-        if (data.success) {
+        if (response.ok) {
           alert('Message sent successfully! I will get back to you soon.');
-          contactForm.reset();
           closeContactModal();
         } else {
-          console.error('Web3Forms error:', data);
-          alert('Failed to send message. Please try again.');
+          alert('Failed to send message. Please try again or use email directly.');
         }
       } catch (error) {
-        console.error('Submission error:', error);
+        console.error('Error:', error);
         alert('Error sending message. Please try again.');
       }
     });
