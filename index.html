@@ -581,9 +581,39 @@
           </div>
         </div>
       </div>
-      <a href="mailto:puneetg862@gmail.com" class="btn btn-primary" style="margin-top:32px">Say Hello</a>
+      <button onclick="openContactModal()" class="btn btn-primary" style="margin-top:32px">Say Hello</button>
     </div>
   </section>
+
+  <!-- Contact Form Modal -->
+  <div class="contact-form-modal" id="contactFormModal">
+    <div class="contact-form-overlay" id="contactFormOverlay"></div>
+    <div class="contact-form-content">
+      <button class="contact-form-close" id="contactFormClose">&times;</button>
+      <h3>Send Me a Message</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" placeholder="Subject" required>
+          <span class="error" id="subjectError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Contact No. or Email *</label>
+          <input type="text" id="contact" name="contact" placeholder="Contact no. or Email" required>
+          <span class="error" id="contactError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
+          <span class="error" id="messageError"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+      </form>
+    </div>
+  </div>
 </main>
 
 <footer class="footer">
