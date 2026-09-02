@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearAllErrors();
 
       const subject = document.getElementById('subject').value.trim();
-      const contact = document.getElementById('contact').value.trim();
+      const contact = document.getElementById('contactInput').value.trim();
       const message = document.getElementById('message').value.trim();
 
       let isValid = true;
@@ -171,32 +171,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!isValid) return;
 
-      // Send email
+      // Send email via Web3Forms
       try {
-        const emailData = {
-          to: 'puneetg862@gmail.com',
-          from: 'punitgenbd@gmail.com',
-          subject: 'Portfolio: ' + subject,
-          message: message,
-          senderContact: contact
-        };
+        const formData = new FormData(contactForm);
+        formData.set('subject', 'Portfolio: ' + subject);
+        formData.set('from_email', contact);
+        formData.set('reply_to', contact);
 
-        // Use FormSubmit.co
-        const response = await fetch('https://formspree.io/f/xjkvrdld', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: contact,
-            subject: 'Portfolio: ' + subject,
-            message: message
-          })
+          body: formData
         });
 
-        if (response.ok) {
+        const data = await response.json();
+        console.log('Web3Forms response:', data);
+
+        if (data.success) {
           alert('Message sent successfully! I will get back to you soon.');
           closeContactModal();
         } else {
-          alert('Failed to send message. Please try again or use email directly.');
+          console.error('Web3Forms error:', data);
+          alert('Failed to send message. Please try again.');
         }
       } catch (error) {
         console.error('Error:', error);
